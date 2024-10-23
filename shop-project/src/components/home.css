@@ -1,0 +1,79 @@
+/* Container for the entire home page */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Grid layout for the top section (logo, shop button, image) */
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columns */
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 40px;
+  }
+  
+  /* Left section for logo and button */
+  .home-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  .shop-logo {
+    width: 150px; /* Adjust size as needed */
+    margin-bottom: 20px;
+  }
+  
+  .shop-button {
+    padding: 15px 30px;
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .shop-button:hover {
+    background-color: #ff7700;
+  }
+  
+  /* Right section for the image */
+  .home-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .featured-image {
+    width: 100%; /* Full width of the right section */
+    max-width: 600px; /* Adjust size if needed */
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  /* Grid layout for future content */
+  .home-content-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  /* Style for each content section */
+  .content-section {
+    background-color: #f2f2f2;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+  }
+  
