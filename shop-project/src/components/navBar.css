@@ -7,6 +7,7 @@
     align-items: center; /* Center items vertically */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
     height: 60px; /* Set a fixed height for the navbar to avoid size changes */
+    color: azure;
 }
 
 /* Styling for the left-aligned section */

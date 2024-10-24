@@ -1,19 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 /* Container for the entire home page */
 .home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  /* Grid layout for the top section (logo, shop button, image) */
-  .home-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columns */
-    gap: 20px;
-    width: 100%;
-    margin-bottom: 40px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Grid layout for the top section (logo, promo text, shop button, image) */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns */
+  gap: 20px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
   
   /* Left section for logo */
   .home-left {
@@ -22,6 +29,7 @@
     align-items: flex-start;
     justify-content: flex-start; /* Align to the top */
     position: relative; /* Allow absolute positioning of the button */
+    padding: 50px;
   }
   
   /* Center the button */
@@ -32,6 +40,7 @@
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%); /* Offset the button to be truly centered */
+    padding-top: 50px; /* Add some space from the bottom */
   }
   
   /* Shop logo */
@@ -45,6 +54,9 @@
   
   /* Shop button */
   .shop-button {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
     padding: 15px 30px;
     background-color: #ff9900;
     color: white;
@@ -61,8 +73,9 @@
   /* Right section for the image */
   .home-right {
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
+    padding-bottom: 20px;
   }
   
   .featured-image {
@@ -70,7 +83,18 @@
     max-width: 600px; /* Adjust size if needed */
     height: auto;
     object-fit: cover;
-    border-radius: 10px;
+    float: right; /* Float the image to the right */
+    mask-image: linear-gradient(
+      to right, 
+      rgba(0, 0, 0, 0) 0%, 
+      rgba(0, 0, 0, 1) 20%
+    ), 
+    linear-gradient(
+      to top, 
+      rgba(0, 0, 0, 0) 0%, 
+      rgba(0, 0, 0, 1) 20%
+    ); /* Create fading effect on left and bottom sides */
+    mask-composite: intersect; /* Make the masks combine */
   }
   
   /* Grid layout for future content */
@@ -80,14 +104,45 @@
     gap: 20px;
     width: 100%;
   }
-  
-  /* Style for each content section */
-  .content-section {
-    background-color: #f2f2f2;
-    padding: 40px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 18px;
-    color: #333;
-  }
+
+  /* Promo text styling */
+.promo-text {
+  margin-bottom: 50px; /* Space between the promo text and the shop button */
+  text-align: center;
+}
+
+.promo-text h1 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 58px;
+  font-weight: bold;
+  color: #333;
+}
+
+.promo-text p {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 24px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.content-section {
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+}
+
+.featured-product-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  object-fit: cover;
+}
   
