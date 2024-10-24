@@ -10,6 +10,8 @@ const NavBar = () => {
   const [username, setUsername] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState(null); // Track scroll direction
+  const [lastScrollY, setLastScrollY] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +30,24 @@ const NavBar = () => {
     });
     return () => unsubscribe();
   }, []);
+
+  // Detect scroll and set direction
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setScrollDirection('down'); // User is scrolling down
+      } else if (window.scrollY < lastScrollY) {
+        setScrollDirection('up'); // User is scrolling up
+      }
+      setLastScrollY(window.scrollY); // Update the last Y position
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
 
   // Handle logout
   const handleLogout = async () => {
@@ -52,7 +72,9 @@ const NavBar = () => {
             <img
               src="https://firebasestorage.googleapis.com/v0/b/shop-project-4b475.appspot.com/o/Runova-logo.jpg?alt=media&token=f4e29a69-d879-45fc-9c3a-21fc47c42b07" // Replace with your image path
               alt="Home"
-              className="home-icon"
+               className={`home-icon ${
+                scrollDirection === 'down' ? 'spin-forward' : scrollDirection === 'up' ? 'spin-backward' : ''
+              }`}
             />
           </Link>
         </li>

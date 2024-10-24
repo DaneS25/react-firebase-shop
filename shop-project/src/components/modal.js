@@ -61,8 +61,10 @@ const ProductModal = ({ product, onClose }) => {
         <p><strong>Stock:</strong> {product.stock}</p>
         <p><strong>Description:</strong> {product.description}</p>
         <p><strong>Sizes Available:</strong> {product.sizes.join(', ')}</p>
-        <button className="close-button" onClick={onClose}>Close</button>
-        <button className="add-to-cart-button" onClick={addToCart}>Add to Cart</button>
+        <div className='buttons'>
+          <button className="close-button" onClick={onClose}>Close</button>
+          <button className="add-to-cart-button" onClick={addToCart}>Add to Cart</button>
+        </div>
       </div>
     </div>
   );

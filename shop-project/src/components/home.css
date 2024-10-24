@@ -131,7 +131,6 @@
 
 .content-section {
   padding: 20px;
-  border-radius: 10px;
   text-align: center;
   font-size: 18px;
   color: #333;
@@ -142,7 +141,26 @@
   max-width: 300px;
   height: auto;
   margin-bottom: 10px;
-  border-radius: 10px;
   object-fit: cover;
+}
+
+.featured-product-image:hover {
+  transform: scale(1.05);
+  transition: ease-in-out 0.3s;
+}
+
+.view-button {
+  background-color: transparent;
+  padding: 10px 20px;
+  border: 2px solid #ff9900;
+  color: rgb(72, 72, 72);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.view-button:hover {
+  background-color: #ff7700;
 }
   

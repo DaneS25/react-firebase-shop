@@ -34,14 +34,19 @@ const ProductList = () => {
     };
 
     fetchProducts();
-  }, [location.search]);
+
+    // Check if a product is passed via location.state from Home page
+    if (location.state && location.state.selectedProduct) {
+      setSelectedProduct(location.state.selectedProduct); // Automatically open the modal
+    }
+  }, [location.search, location.state]);
 
   const openModal = (product) => {
-    setSelectedProduct(product);
+    setSelectedProduct(product); // Open the modal when a product is clicked
   };
 
   const closeModal = () => {
-    setSelectedProduct(null);
+    setSelectedProduct(null); // Close the modal
   };
 
   return (
@@ -62,6 +67,7 @@ const ProductList = () => {
         ))}
       </div>
 
+      {/* Render the modal only if a product is selected */}
       {selectedProduct && <ProductModal product={selectedProduct} onClose={closeModal} />}
     </div>
   );

@@ -66,7 +66,7 @@ const Home = () => {
               <img src={product.imageUrl} alt={product.name} className="featured-product-image" />
               <h2>{product.name}</h2>
               <p>${product.price}</p>
-              <button>View Product</button>
+              <button className='view-button'>View Product</button>
             </div>
           ))
         )}
