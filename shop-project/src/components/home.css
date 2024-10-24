@@ -12,7 +12,6 @@
     grid-template-columns: 1fr 1fr; /* 2 columns */
     gap: 20px;
     width: 100%;
-    max-width: 1200px;
     margin-bottom: 40px;
   }
   
@@ -80,7 +79,6 @@
     grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
     gap: 20px;
     width: 100%;
-    max-width: 1200px;
   }
   
   /* Style for each content section */
