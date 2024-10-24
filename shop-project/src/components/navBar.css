@@ -1,7 +1,7 @@
 /* Basic styling for navbar */
 .navbar {
     background-color: #333; /* Background color for the navbar */
-    padding: 10px 20px; /* Padding around the navbar */
+    padding: 20px 20px; /* Padding around the navbar */
   }
   
   /* Styling for the unordered list */
@@ -38,5 +38,18 @@
   .nav-right {
     display: flex; /* Flexbox for right section */
     align-items: center; /* Center items vertically */
+  }
+
+  .login-button {
+    background-color: #ff9900; /* Background color for the login button */
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    color: white; /* Text color */
+    transition: background-color 0.3s ease; /* Transition effect */
+    text-decoration: none;
+  }
+  
+  .login-button:hover {
+    background-color: #ff7700; /* Darker color on hover */
   }
   

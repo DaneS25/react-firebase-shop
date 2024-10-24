@@ -5,6 +5,7 @@ import ProductList from './components/productList'; // Assuming this is your pro
 import About from './components/about'; // Import About component
 import Contact from './components/contact'; // Import other components as needed
 import Cart from './components/cart'; // Import other components as needed
+import Login from './login';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );

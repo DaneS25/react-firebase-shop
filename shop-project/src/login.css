@@ -1,0 +1,50 @@
+/* login.css */
+
+.login-container {
+    max-width: 400px; /* Limit the width of the login form */
+    margin: 50px auto; /* Center the container */
+    padding: 20px; /* Padding around the content */
+    background-color: #f9f9f9; /* Light background color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .login-container h1 {
+    text-align: center; /* Center the header */
+    color: #333; /* Dark color for the header */
+  }
+  
+  .login-container form {
+    display: flex; /* Flexbox for form layout */
+    flex-direction: column; /* Stack form elements vertically */
+  }
+  
+  .login-container label {
+    margin-bottom: 5px; /* Spacing below labels */
+  }
+  
+  .login-container input {
+    margin-bottom: 15px; /* Spacing below inputs */
+    padding: 10px; /* Padding for input fields */
+    border: 1px solid #ccc; /* Border for input fields */
+    border-radius: 4px; /* Rounded corners */
+  }
+  
+  .login-container button {
+    padding: 10px; /* Padding for the button */
+    background-color: #ff9900; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease; /* Transition effect */
+  }
+  
+  .login-container button:hover {
+    background-color: #ff7700; /* Darker color on hover */
+  }
+  
+  .error-message {
+    color: red; /* Red color for error messages */
+    text-align: center; /* Center error messages */
+  }
+  
