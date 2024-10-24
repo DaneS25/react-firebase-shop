@@ -4,10 +4,12 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import ProductModal from './modal';
 import './productList.css';
+import shoeGif from '../Assets/shoegif.gif'; // Import the GIF
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
   const location = useLocation();
 
   useEffect(() => {
@@ -31,6 +33,13 @@ const ProductList = () => {
         ...doc.data(),
       }));
       setProducts(productList);
+
+      // Force the splash to stay for 1 second after fetching
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 2000); // Adjust time as needed (currently 1 second)
+
+      return () => clearTimeout(timeoutId); // Cleanup function to clear the timeout
     };
 
     fetchProducts();
@@ -48,6 +57,15 @@ const ProductList = () => {
   const closeModal = () => {
     setSelectedProduct(null); // Close the modal
   };
+
+  if (loading) {
+    // Render loading splash with GIF
+    return (
+      <div className="loading-splash">
+        <img src={shoeGif} alt="Loading..." className="loading-gif" />
+      </div>
+    );
+  }
 
   return (
     <div className="product-list-container">

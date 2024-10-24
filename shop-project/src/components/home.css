@@ -163,4 +163,20 @@
 .view-button:hover {
   background-color: #ff7700;
 }
-  
+
+.loading-splash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: white; /* Ensure the background is white */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.loading-gif {
+  width: 500px; /* Adjust size as needed */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 50%; /* Make the image round */
+  mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 60%);
+  -webkit-mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 60%); /* For Safari */
+}

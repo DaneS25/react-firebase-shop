@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { collection, getDocs, query, where } from 'firebase/firestore'; // Firebase Firestore functions
 import { db } from '../firebase'; // Import Firebase Firestore setup
 import './home.css'; // Import styles
+import shoeGif from '../Assets/shoegif.gif'; // Import the GIF
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
   const navigate = useNavigate();
 
   // Fetch featured products from Firestore
@@ -19,6 +21,13 @@ const Home = () => {
         ...doc.data(),
       }));
       setFeaturedProducts(products);
+      setLoading(true); // Set loading to false after fetching data
+
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 1000); // Keep splash for 3 seconds
+  
+      return () => clearTimeout(timeoutId); // Cleanup function to clear the timeout
     };
 
     fetchFeaturedProducts();
@@ -28,6 +37,15 @@ const Home = () => {
   const handleProductClick = (product) => {
     navigate('/products', { state: { selectedProduct: product } }); // Pass the product data to ProductList page
   };
+
+  if (loading) {
+    // Render loading splash with GIF
+    return (
+      <div className="loading-splash">
+        <img src={shoeGif} alt="Loading..." className="loading-gif" />
+      </div>
+    );
+  }
 
   return (
     <div className="home-container">

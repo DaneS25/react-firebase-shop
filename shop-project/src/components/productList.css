@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 /* productList.css */
 
 .product-list-container {
@@ -13,7 +16,12 @@
   
   .product-list-header {
     margin-bottom: 20px;
-    font-size: 2rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 58px;
+    font-weight: bold;
+    color: #333;
     text-align: center;
   }
   
@@ -31,6 +39,11 @@
   
   /* Styling for product card */
   .product-card {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 18px;
+    color: #666;
     border: 1px solid #ff9900;
     padding: 15px;
     text-align: center;
@@ -52,6 +65,23 @@
     max-width: 100%;
     max-height: 150px;
     height: auto;
+  }
+
+  .loading-splash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: white; /* Ensure the background is white */
+    overflow: hidden; /* Prevent overflow */
+  }
+  
+  .loading-gif {
+    width: 500px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Make the image round */
+    mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 60%);
+    -webkit-mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 60%); /* For Safari */
   }
   
   /* Prevent horizontal scrolling */

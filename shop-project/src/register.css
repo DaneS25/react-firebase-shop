@@ -1,18 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 /* Container for the registration page */
 .register-container {
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #c9c7c7;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   /* Heading styles */
   .register-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: center; /* Center the header */
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 38px;
+    font-weight: bold;
+    color: #333;
   }
   
   /* Form styles */
@@ -22,30 +28,43 @@
   }
   
   .register-container label {
+    margin-bottom: 10px; /* Increased spacing below labels for better separation */
+    font-weight: bold; /* Optional: Make label text bold for better visibility */
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 18px;
     font-weight: bold;
-    margin-bottom: 5px;
+    color: #333;
   }
   
   .register-container input {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    margin-bottom: 15px; /* Spacing below inputs */
+    padding: 10px; /* Padding for input fields */
+    border: 1px solid #ccc; /* Border for input fields */
+    border-radius: 4px; /* Rounded corners */
+    width: 100%; /* Make inputs take full width of the container */
+    box-sizing: border-box; /* Include padding and border in element's total width */
   }
   
   /* Button styles */
   .register-container button {
-    padding: 12px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background-color: transparent;
+    padding: 10px 20px;
+    border: 2px solid #ff9900;
+    color: rgb(72, 72, 72);
     font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Make button take full width of the container */
   }
   
   .register-container button:hover {
-    background-color: #218838;
+    background-color: #ff7700;
   }
   
   /* Error and success messages */
