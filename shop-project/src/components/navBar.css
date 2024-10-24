@@ -90,7 +90,7 @@
 
 /* Hover effect for links */
 .nav-right a:hover {
-    background-color: #555;
+    background-color: #ff7700;
 }
 
 /* Styling for the login/logout button */
@@ -113,7 +113,7 @@
 }
 
 .dropdown-shop {
-    color: white;
+    color: #c9c7c7;
 }
 
 /* Dropdown Menu */
@@ -132,7 +132,7 @@
 
 /* Hover effect for the dropdown trigger */
 .dropdown span:hover {
-    background-color: #555; /* Add background color on hover */
+    background-color: #ff7700; /* Add background color on hover */
 }
 
 /* Dropdown Menu */
@@ -140,8 +140,8 @@
     position: absolute;
     top: 40px;
     left: 0;
-    background-color: white;
-    border: 1px solid #ddd;
+    background-color: #c9c7c7;
+    border: 2px solid #ff9900;
     padding: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: none; /* Hide the menu by default */
@@ -152,14 +152,16 @@
 
 /* Dropdown items */
 .dropdown-menu li {
+    padding: 10px;
     margin: 10px 0;
     cursor: pointer;
     text-align: left;
+    color: rgb(72, 72, 72);
 }
 
 .dropdown-menu li:hover {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #ff7700;
+    padding: 10px;
 }
 
 /* Show the dropdown menu when hovering over either the trigger or the menu */
