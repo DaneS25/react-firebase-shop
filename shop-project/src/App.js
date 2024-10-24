@@ -6,6 +6,8 @@ import About from './components/about'; // Import About component
 import Contact from './components/contact'; // Import other components as needed
 import Cart from './components/cart'; // Import other components as needed
 import Login from './login';
+import Register from './register';
+import AdminPanel from './components/adminPanel'; // Import AdminPanel component
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/admin" element={<AdminPanel />} />
       </Routes>
     </Router>
   );

@@ -47,4 +47,17 @@
     color: red; /* Red color for error messages */
     text-align: center; /* Center error messages */
   }
+
+  .register-link {
+    margin-top: 20px;
+    text-align: center;
+  }
   
+  .register-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline;
+  }

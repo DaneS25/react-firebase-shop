@@ -1,55 +1,95 @@
 /* Basic styling for navbar */
 .navbar {
-    background-color: #333; /* Background color for the navbar */
-    padding: 20px 20px; /* Padding around the navbar */
-  }
-  
-  /* Styling for the unordered list */
-  .nav-list {
+    background-color: #333; /* Dark background for the navbar */
+    padding: 10px 20px; /* Padding around the navbar */
     display: flex;
-    justify-content: space-between; /* Space between left and right sections */
+    justify-content: space-between; /* Align home on the left, and others on the right */
     align-items: center; /* Center items vertically */
-    list-style-type: none; /* Remove bullet points */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    margin: 0 auto; /* Center the navbar */
-  }
-  
-  /* Styling for individual navigation items */
-  .nav-item {
-    margin: 0 15px; /* Space between items */
-  }
-  
-  /* Link styling */
-  .nav-item a {
-    color: white; /* Text color */
-    text-decoration: none; /* Remove underline */
-    padding: 8px 16px; /* Padding around the link */
-    transition: background-color 0.3s; /* Smooth background color transition */
-  }
-  
-  /* Change background color on hover */
-  .nav-item a:hover {
-    background-color: #555; /* Darker background on hover */
-    border-radius: 5px; /* Rounded corners on hover */
-  }
-  
-  /* Right-aligned section */
-  .nav-right {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+    height: 60px; /* Set a fixed height for the navbar to avoid size changes */
+}
+
+/* Styling for the left-aligned section */
+.nav-left {
+    display: flex; /* Flexbox for the left section */
+    align-items: center; /* Vertically center items */
+}
+
+/* Styling for the right-aligned section */
+.nav-right {
     display: flex; /* Flexbox for right section */
     align-items: center; /* Center items vertically */
-  }
+    gap: 20px; /* Space between items */
+}
 
-  .login-button {
-    background-color: #ff9900; /* Background color for the login button */
+/* Styling for individual navigation items */
+.nav-left li,
+.nav-right li {
+    list-style-type: none; /* Remove bullet points */
+    margin: 0 10px; /* Add margin between navigation items */
+}
+
+/* Link styling */
+.nav-left a,
+.nav-right a {
+    color: white; /* White text color */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 15px; /* Padding around links */
+    transition: background-color 0.3s; /* Smooth background color transition */
+    border-radius: 5px; /* Rounded corners for links */
+    height: 100%; /* Ensure link elements span full navbar height */
+    display: flex; /* Flex display for vertical centering */
+    align-items: center; /* Center text vertically */
+}
+
+/* Hover effect for links */
+.nav-left a:hover,
+.nav-right a:hover {
+    background-color: #555; /* Darker background on hover */
+}
+
+/* Styling for the login/logout button */
+.auth-button {
+    background-color: #ff9900; /* Orange background for the login/logout button */
     padding: 10px 20px; /* Padding for the button */
+    border: none; /* No border */
     border-radius: 5px; /* Rounded corners */
-    color: white; /* Text color */
-    transition: background-color 0.3s ease; /* Transition effect */
-    text-decoration: none;
-  }
-  
-  .login-button:hover {
-    background-color: #ff7700; /* Darker color on hover */
-  }
-  
+    color: white; /* White text color */
+    font-size: 16px; /* Font size for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+    text-decoration: none; /* Remove underline */
+    height: 100%; /* Ensure the button matches the navbar height */
+    display: flex; /* Flex display for vertical centering */
+    align-items: center; /* Center button content vertically */
+}
+
+/* Hover effect for login/logout button */
+.auth-button:hover {
+    background-color: #ff7700; /* Darker orange on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack navbar items on smaller screens */
+        align-items: flex-start; /* Align to the left */
+    }
+    
+    .nav-left,
+    .nav-right {
+        flex-direction: column; /* Stack navigation links vertically */
+        width: 100%; /* Full width */
+        align-items: flex-start; /* Align items to the left */
+    }
+    
+    .nav-left li,
+    .nav-right li {
+        margin: 10px 0; /* Add margin between items */
+    }
+    
+    .auth-button {
+        width: 100%; /* Full width button on mobile */
+        text-align: center;
+    }
+}

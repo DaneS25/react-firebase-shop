@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate, Link } from 'react-router-dom'; // Import Link for navigation
 import './login.css'; // Import styles for the Login page
 
 const Login = () => {
@@ -48,6 +48,11 @@ const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      
+      {/* Link to the registration page */}
+      <p className="register-link">
+        Don't have an account? <Link to="/register">Register here</Link>
+      </p>
     </div>
   );
 };
