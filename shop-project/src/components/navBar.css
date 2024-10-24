@@ -1,96 +1,194 @@
 /* Basic styling for navbar */
 .navbar {
-    background-color: #333; /* Dark background for the navbar */
-    padding: 10px 20px; /* Padding around the navbar */
+    background-color: #333;
+    padding: 10px 20px;
     display: flex;
-    justify-content: space-between; /* Align home on the left, and others on the right */
-    align-items: center; /* Center items vertically */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
-    height: 60px; /* Set a fixed height for the navbar to avoid size changes */
-    color: azure;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 60px;
 }
 
 /* Styling for the left-aligned section */
 .nav-left {
-    display: flex; /* Flexbox for the left section */
-    align-items: center; /* Vertically center items */
+    display: flex;
+    align-items: center;
 }
 
+/* Home icon styles */
+.home-icon {
+    width: 60px; /* Fixed size for the icon */
+    height: 60px;
+    border-radius: 50%; /* Make the image round */
+    cursor: pointer;
+    object-fit: cover; /* Maintain aspect ratio without distortion */
+    margin-right: 15px; /* Add some space after the icon */
+}
+
+/* Remove bullet points (black dot) from the nav items */
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
 /* Styling for the right-aligned section */
 .nav-right {
-    display: flex; /* Flexbox for right section */
-    align-items: center; /* Center items vertically */
+    display: flex;
+    align-items: center;
     gap: 20px; /* Space between items */
 }
 
 /* Styling for individual navigation items */
-.nav-left li,
 .nav-right li {
-    list-style-type: none; /* Remove bullet points */
-    margin: 0 10px; /* Add margin between navigation items */
+    list-style-type: none; /* Ensure no bullet points are displayed */
+    margin: 0 10px;
+    position: relative;
 }
 
 /* Link styling */
-.nav-left a,
 .nav-right a {
-    color: white; /* White text color */
-    text-decoration: none; /* Remove underline */
-    padding: 10px 15px; /* Padding around links */
-    transition: background-color 0.3s; /* Smooth background color transition */
-    border-radius: 5px; /* Rounded corners for links */
-    height: 100%; /* Ensure link elements span full navbar height */
-    display: flex; /* Flex display for vertical centering */
-    align-items: center; /* Center text vertically */
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
 }
 
 /* Hover effect for links */
-.nav-left a:hover,
 .nav-right a:hover {
-    background-color: #555; /* Darker background on hover */
+    background-color: #555;
 }
 
 /* Styling for the login/logout button */
 .auth-button {
-    background-color: #ff9900; /* Orange background for the login/logout button */
-    padding: 10px 20px; /* Padding for the button */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    color: white; /* White text color */
-    font-size: 16px; /* Font size for the button */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth background color transition */
-    text-decoration: none; /* Remove underline */
-    height: 100%; /* Ensure the button matches the navbar height */
-    display: flex; /* Flex display for vertical centering */
-    align-items: center; /* Center button content vertically */
+    background-color: #ff9900;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
 /* Hover effect for login/logout button */
 .auth-button:hover {
-    background-color: #ff7700; /* Darker orange on hover */
+    background-color: #ff7700;
+}
+
+.dropdown-shop {
+    color: white;
+}
+
+/* Dropdown Menu */
+/* Styling for the dropdown */
+.dropdown {
+    position: relative;
+}
+
+/* Dropdown trigger styling */
+.dropdown span {
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the dropdown trigger */
+.dropdown span:hover {
+    background-color: #555; /* Add background color on hover */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Hide the menu by default */
+    flex-direction: column;
+    width: 150px;
+    z-index: 100; /* Ensure it appears above other elements */
+}
+
+/* Dropdown items */
+.dropdown-menu li {
+    margin: 10px 0;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Show the dropdown menu when hovering over either the trigger or the menu */
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: flex;
+}
+
+/* Keep the shop link consistent with others */
+.dropdown span,
+.nav-right a {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.dropdown span:hover,
+.nav-right a:hover {
+    background-color: #555;
+}
+
+/* Additional styling to prevent flickering */
+.dropdown:hover .dropdown-menu {
+    display: flex; /* Show dropdown when hovered */
+}
+
+
+/* Welcome message styling */
+.welcome {
+    color: white;
+    font-size: 1.2rem;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column; /* Stack navbar items on smaller screens */
-        align-items: flex-start; /* Align to the left */
+        align-items: flex-start;
     }
     
     .nav-left,
     .nav-right {
         flex-direction: column; /* Stack navigation links vertically */
-        width: 100%; /* Full width */
-        align-items: flex-start; /* Align items to the left */
+        width: 100%;
+        align-items: flex-start;
     }
     
     .nav-left li,
     .nav-right li {
-        margin: 10px 0; /* Add margin between items */
+        margin: 10px 0;
     }
     
     .auth-button {
-        width: 100%; /* Full width button on mobile */
+        width: 100%;
         text-align: center;
     }
 }

@@ -1,39 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom'; // Import useLocation to access passed state
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebase'; // import Firestore
-import ProductModal from './modal'; // Import the modal component
-import './productList.css'; // Import styles
+import { useLocation } from 'react-router-dom';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../firebase';
+import ProductModal from './modal';
+import './productList.css';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null); // State for the selected product
-  const location = useLocation(); // Access passed state
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchProducts = async () => {
       const productCollection = collection(db, 'products');
-      const productSnapshot = await getDocs(productCollection);
+
+      // Get query parameter from the URL (e.g., category=mens)
+      const searchParams = new URLSearchParams(location.search);
+      const category = searchParams.get('category');
+
+      let productQuery;
+      if (category && category !== 'all') {
+        productQuery = query(productCollection, where('type', '==', category));
+      } else {
+        productQuery = productCollection; // No filter or "All" category
+      }
+
+      const productSnapshot = await getDocs(productQuery);
       const productList = productSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setProducts(productList);
     };
-    fetchProducts();
 
-    // Check if a product was passed via state from the Home page
-    if (location.state && location.state.selectedProduct) {
-      setSelectedProduct(location.state.selectedProduct); // Automatically open the modal
-    }
-  }, [location.state]);
+    fetchProducts();
+  }, [location.search]);
 
   const openModal = (product) => {
-    setSelectedProduct(product); // Set the selected product to be shown in the modal
+    setSelectedProduct(product);
   };
 
   const closeModal = () => {
-    setSelectedProduct(null); // Close the modal by clearing the selected product
+    setSelectedProduct(null);
   };
 
   return (
@@ -45,7 +53,7 @@ const ProductList = () => {
           <div 
             key={product.id} 
             className="product-card"
-            onClick={() => openModal(product)} // Make the product clickable
+            onClick={() => openModal(product)}
           >
             <img src={product.imageUrl} alt={product.name} className="product-image" />
             <h2>{product.name}</h2>
@@ -54,7 +62,6 @@ const ProductList = () => {
         ))}
       </div>
 
-      {/* Render the modal only if a product is selected */}
       {selectedProduct && <ProductModal product={selectedProduct} onClose={closeModal} />}
     </div>
   );

@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth, db } from '../firebase'; // Import Firebase authentication and Firestore
-import { doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
-import './navBar.css'; // Import styles
+import { auth, db } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import './navBar.css';
 
 const NavBar = () => {
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
-  // Monitor authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        // Fetch the user's username and admin status from Firestore
         const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
         if (userDoc.exists()) {
           setUsername(userDoc.data().username);
-          setIsAdmin(userDoc.data().isAdmin); // Get admin status
+          setIsAdmin(userDoc.data().isAdmin);
         }
       } else {
         setUsername('');
@@ -34,21 +33,47 @@ const NavBar = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate('/'); // Navigate to home after logout
+      navigate('/');
     } catch (error) {
       console.error('Error logging out: ', error);
     }
   };
 
+  const handleCategoryClick = (category) => {
+    navigate(`/products?category=${category}`);
+  };
+
   return (
     <nav className="navbar">
       <ul className="nav-left">
-        <li><Link to="/">Home</Link></li>
+        {/* Only the image is wrapped in the link */}
+        <li>
+          <Link to="/">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/shop-project-4b475.appspot.com/o/Runova-logo.jpg?alt=media&token=f4e29a69-d879-45fc-9c3a-21fc47c42b07" // Replace with your image path
+              alt="Home"
+              className="home-icon"
+            />
+          </Link>
+        </li>
       </ul>
       <ul className="nav-right">
-        {user && username && <li>Welcome, {username}</li>} {/* Display welcome message */}
-        {isAdmin && <li><Link to="/admin">Admin Panel</Link></li>} {/* Only show if admin */}
-        <li><Link to="/products">Shop</Link></li>
+        {user && username && <li className='welcome'>Welcome, {username}</li>}
+        {isAdmin && <li><Link to="/admin">Admin Panel</Link></li>}
+        <li
+          className="dropdown"
+          onMouseEnter={() => setShowDropdown(true)}
+          onMouseLeave={() => setShowDropdown(false)}
+        >
+          <span className='dropdown-shop'>Shop</span>
+          {showDropdown && (
+            <ul className="dropdown-menu">
+              <li onClick={() => handleCategoryClick('mens')}>Mens</li>
+              <li onClick={() => handleCategoryClick('womens')}>Womens</li>
+              <li onClick={() => handleCategoryClick('all')}>All</li>
+            </ul>
+          )}
+        </li>
         <li><Link to="/about">About</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to="/cart">Cart</Link></li>
