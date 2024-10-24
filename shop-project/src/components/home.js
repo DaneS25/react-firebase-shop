@@ -8,15 +8,18 @@ const Home = () => {
       <div className="home-grid">
         {/* Left Section: Logo and Shop Button */}
         <div className="home-left">
-          <img src="/path-to-your-logo/logo.png" alt="Shop Logo" className="shop-logo" />
-          <Link to="/products">
-            <button className="shop-button">SHOP</button>
-          </Link>
+            <img src="https://firebasestorage.googleapis.com/v0/b/shop-project-4b475.appspot.com/o/shubham-mittal-sCXmwaVrBio-unsplash.jpg?alt=media&token=65e23a3a-9022-49e8-83d6-90a6e6cdcd3a" alt="Shop Logo" className="shop-logo" />
+          {/* Shop Button Container */}
+          <div className="shop-button-container">
+            <Link to="/products">
+              <button className="shop-button">SHOP</button>
+            </Link>
+          </div>
         </div>
         
         {/* Right Section: Image */}
         <div className="home-right">
-          <img src="/path-to-your-image/featured-image.jpg" alt="Featured" className="featured-image" />
+          <img src="https://firebasestorage.googleapis.com/v0/b/shop-project-4b475.appspot.com/o/imani-bahati-LxVxPA1LOVM-unsplash.jpg?alt=media" alt="Featured" className="featured-image" />
         </div>
       </div>
 

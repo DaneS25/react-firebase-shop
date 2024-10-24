@@ -16,19 +16,35 @@
     margin-bottom: 40px;
   }
   
-  /* Left section for logo and button */
+  /* Left section for logo */
   .home-left {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start; /* Align to the top */
+    position: relative; /* Allow absolute positioning of the button */
   }
   
+  /* Center the button */
+  .shop-button-container {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    position: absolute; /* Position relative to .home-left */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset the button to be truly centered */
+  }
+  
+  /* Shop logo */
   .shop-logo {
     width: 150px; /* Adjust size as needed */
-    margin-bottom: 20px;
+    height: 150px; /* Set height equal to width for a perfect circle */
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    margin-bottom: 20px; /* Space below the logo */
   }
   
+  /* Shop button */
   .shop-button {
     padding: 15px 30px;
     background-color: #ff9900;
