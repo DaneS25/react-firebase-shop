@@ -48,7 +48,7 @@ const NavBar = () => {
       <ul className="nav-right">
         {user && username && <li>Welcome, {username}</li>} {/* Display welcome message */}
         {isAdmin && <li><Link to="/admin">Admin Panel</Link></li>} {/* Only show if admin */}
-        <li><Link to="/products">Products</Link></li>
+        <li><Link to="/products">Shop</Link></li>
         <li><Link to="/about">About</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to="/cart">Cart</Link></li>
