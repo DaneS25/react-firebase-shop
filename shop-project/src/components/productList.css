@@ -87,3 +87,94 @@
 body {
   overflow-x: hidden;
 }
+
+/* Small laptops (1024px and below) */
+@media (max-width: 1024px) {
+  .product-list-container {
+      grid-template-columns: 1fr; /* Stack filter and products vertically */
+  }
+
+  .filter-area {
+      height: auto;
+      padding: 10px;
+  }
+
+  .product-list-header {
+      font-size: 42px;
+  }
+
+  .products-grid {
+      gap: 30px;
+  }
+
+  .product-card {
+      font-size: 16px;
+      padding: 10px;
+      max-width: 200px; /* Shrink card width */
+  }
+
+  .product-image {
+      max-height: 130px;
+  }
+}
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  .product-list-container {
+      grid-template-columns: 1fr;
+      padding: 10px;
+  }
+
+  .filter-area {
+      padding: 8px;
+  }
+
+  .product-list-header {
+      font-size: 36px;
+  }
+
+  .products-grid {
+      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Smaller columns */
+  }
+
+  .product-card {
+      font-size: 14px;
+      padding: 8px;
+      max-width: 180px;
+  }
+
+  .product-image {
+      max-height: 110px;
+  }
+}
+
+/* Phones (480px and below) */
+@media (max-width: 480px) {
+  .product-list-container {
+      padding: 5px;
+  }
+
+  .product-list-header {
+      font-size: 28px;
+  }
+
+  .products-grid {
+      gap: 15px;
+      grid-template-columns: 1fr; /* Stack cards in a single column */
+  }
+
+  .product-card {
+      font-size: 12px;
+      padding: 6px;
+      max-width: 160px;
+  }
+
+  .product-image {
+      max-height: 90px;
+  }
+
+  .loading-gif {
+      width: 300px; /* Smaller loading gif for small screens */
+  }
+}

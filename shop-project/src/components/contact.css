@@ -61,4 +61,88 @@
   .submit-button:hover {
     background-color: #ff7700; /* Darker color on hover */
   }
-  
+
+  /* Small laptops (1024px and below) */
+@media (max-width: 1024px) {
+  .contact-container {
+      padding: 15px;
+      max-width: 700px;
+  }
+
+  .contact-container h1 {
+      font-size: 28px; /* Slightly smaller header font size */
+  }
+
+  .contact-info p {
+      font-size: 16px; /* Reduce paragraph font size */
+  }
+
+  .submit-button {
+      padding: 8px 16px; /* Smaller padding for button */
+  }
+}
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  .contact-container {
+      padding: 10px;
+      max-width: 90%; /* Make container more flexible */
+  }
+
+  .contact-container h1 {
+      font-size: 24px;
+  }
+
+  .contact-info h2,
+  .contact-form h2 {
+      font-size: 20px;
+  }
+
+  .contact-info p {
+      font-size: 15px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+      padding: 8px; /* Reduce padding for inputs */
+      font-size: 14px; /* Slightly smaller font for inputs */
+  }
+
+  .submit-button {
+      padding: 8px 12px;
+      font-size: 14px;
+  }
+}
+
+/* Phones (480px and below) */
+@media (max-width: 480px) {
+  .contact-container {
+      padding: 8px;
+      margin: 10px auto; /* Less margin for small screens */
+      max-width: 100%; /* Full width container */
+  }
+
+  .contact-container h1 {
+      font-size: 20px;
+  }
+
+  .contact-info h2,
+  .contact-form h2 {
+      font-size: 18px;
+  }
+
+  .contact-info p {
+      font-size: 14px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+      padding: 6px;
+      font-size: 13px;
+  }
+
+  .submit-button {
+      padding: 6px 10px;
+      font-size: 13px;
+  }
+} 
