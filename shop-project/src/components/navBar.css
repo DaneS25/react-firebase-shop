@@ -196,27 +196,23 @@
     color: rgb(72, 72, 72);
 }
 
-/* Responsive adjustments */
+/* Small laptops (1024px and below) */
+@media (max-width: 1024px) {
+    .navbar {
+        display: none;
+    }
+}
+
+/* Tablets (768px and below) */
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column; /* Stack navbar items on smaller screens */
-        align-items: flex-start;
+        display: none;
     }
-    
-    .nav-left,
-    .nav-right {
-        flex-direction: column; /* Stack navigation links vertically */
-        width: 100%;
-        align-items: flex-start;
-    }
-    
-    .nav-left li,
-    .nav-right li {
-        margin: 10px 0;
-    }
-    
-    .auth-button {
-        width: 100%;
-        text-align: center;
+}
+
+/* Phones (480px and below) */
+@media (max-width: 480px) {
+    .navbar {
+        display: none;
     }
 }

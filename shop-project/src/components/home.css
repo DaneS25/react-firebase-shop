@@ -33,15 +33,16 @@
   }
   
   /* Center the button */
-  .shop-button-container {
+  .shop-button-wrapper {
     display: flex;
     justify-content: center; /* Center the button horizontally */
-    position: absolute; /* Position relative to .home-left */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Offset the button to be truly centered */
-    padding-top: 50px; /* Add some space from the bottom */
-  }
+    width: 100%;
+}
+
+.shop-button-container {
+    margin-top: 50px; /* Consistent space from promo text */
+    position: relative;
+}
   
   /* Shop logo */
   .shop-logo {
@@ -179,4 +180,154 @@
   border-radius: 50%; /* Make the image round */
   mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 60%);
   -webkit-mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 60%); /* For Safari */
+}
+
+/* Small laptops (1024px and below) */
+@media (max-width: 1024px) {
+  .home-container {
+      padding: 0 10px;
+  }
+
+  .home-grid {
+      grid-template-columns: 1fr; /* Change to a single column */
+      gap: 15px;
+  }
+
+  .home-left, .home-right {
+      padding: 20px;
+  }
+
+  .shop-logo {
+      width: 120px;
+      height: 120px;
+  }
+
+  .promo-text h1 {
+      font-size: 48px;
+  }
+
+  .promo-text p {
+      font-size: 20px;
+  }
+
+  .shop-button {
+      font-size: 16px;
+      padding: 10px 20px;
+  }
+
+  .featured-image {
+      max-width: 500px;
+  }
+
+  .promo-text {
+    margin-bottom: 30px; /* Maintain space below promo text */
+  }
+
+  .shop-button-container {
+      margin-top: 30px; /* Maintain consistent space above button */
+  }
+
+  .home-content-grid {
+      grid-template-columns: repeat(2, 1fr); /* Change to 2 columns */
+  }
+}
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  .home-container {
+      padding: 0 8px;
+  }
+
+  .home-left, .home-right {
+      padding: 15px;
+  }
+
+  .promo-text h1 {
+      font-size: 36px;
+  }
+
+  .promo-text p {
+      font-size: 18px;
+  }
+
+  .shop-button {
+      font-size: 14px;
+      padding: 8px 16px;
+  }
+
+  .shop-logo {
+      width: 100px;
+      height: 100px;
+  }
+
+  .featured-image {
+      max-width: 100%;
+  }
+
+  .promo-text {
+    margin-bottom: 30px; /* Maintain space below promo text */
+  }
+
+  .shop-button-container {
+      margin-top: 30px; /* Maintain consistent space above button */
+  }
+
+  .home-content-grid {
+      grid-template-columns: 1fr; /* Stack in a single column */
+  }
+}
+
+/* Phones (480px and below) */
+@media (max-width: 480px) {
+  .home-container {
+      padding: 0 5px;
+  }
+
+  .home-left, .home-right {
+      padding: 10px;
+  }
+
+  .promo-text h1 {
+      font-size: 28px;
+  }
+
+  .promo-text p {
+      font-size: 16px;
+  }
+
+  .shop-button {
+      font-size: 12px;
+      padding: 6px 12px;
+  }
+
+  .shop-logo {
+      width: 80px;
+      height: 80px;
+  }
+
+  .featured-image {
+      max-width: 100%;
+      height: auto;
+  }
+
+  .home-content-grid {
+      grid-template-columns: 1fr; /* Single column */
+  }
+
+  .view-button {
+      font-size: 14px;
+      padding: 6px 10px;
+  }
+
+  .promo-text {
+    margin-bottom: 30px; /* Maintain space below promo text */
+  }
+
+  .shop-button-container {
+      margin-top: 30px; /* Maintain consistent space above button */
+  }
+
+  .loading-gif {
+      width: 300px;
+  }
 }

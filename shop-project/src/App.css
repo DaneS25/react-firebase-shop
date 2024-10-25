@@ -36,3 +36,56 @@
     transform: rotate(360deg);
   }
 }
+
+/* General laptop adjustments (1024px and below) */
+@media (max-width: 1024px) {
+  .App-header {
+    font-size: calc(8px + 1.8vmin); /* Slightly smaller font for laptops */
+    padding: 20px;
+  }
+
+  .App-logo {
+    height: 30vmin; /* Reduce logo size */
+  }
+}
+
+/* Tablet adjustments (768px and below) */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: calc(8px + 1.6vmin); /* Smaller font for tablets */
+    flex-direction: column; /* Ensure centered layout */
+    padding: 15px;
+  }
+
+  .App-logo {
+    height: 25vmin; /* Further reduce logo size */
+  }
+}
+
+/* Large mobile adjustments (600px and below) */
+@media (max-width: 600px) {
+  .App-header {
+    font-size: calc(8px + 1.4vmin); /* Smaller font for mobile */
+    padding: 10px;
+  }
+
+  .App-logo {
+    height: 20vmin; /* Reduce logo size */
+  }
+}
+
+/* Small mobile adjustments (400px and below) */
+@media (max-width: 400px) {
+  .App-header {
+    font-size: calc(8px + 1.2vmin); /* Smallest font size for very small screens */
+    padding: 5px;
+  }
+
+  .App-logo {
+    height: 18vmin; /* Further reduce logo size */
+  }
+
+  .App-link {
+    font-size: 12px; /* Ensure links are readable */
+  }
+}

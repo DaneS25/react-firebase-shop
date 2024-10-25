@@ -61,10 +61,12 @@ const Home = () => {
           </div>
 
           {/* Shop Button Container */}
-          <div className="shop-button-container">
-            <Link to="/products">
-              <button className="shop-button">SHOP NOW</button>
-            </Link>
+          <div className='shop-button-wrapper'>
+            <div className="shop-button-container">
+              <Link to="/products">
+                <button className="shop-button">SHOP NOW</button>
+              </Link>
+            </div>
           </div>
         </div>
         
