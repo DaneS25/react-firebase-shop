@@ -196,10 +196,79 @@
     color: rgb(72, 72, 72);
 }
 
+.hamburger {
+    display: none;
+    position: fixed; /* Fixed to top-right corner */
+    top: 20px; /* Adjust as needed for positioning */
+    right: 20px;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px;
+    z-index: 1001; /* Ensure it appears on top */
+}
+
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #c9c7c7;
+    transition: 0.3s;
+}
+
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 60px; /* Position right below the hamburger icon */
+    right: 20px;
+    background-color: #c9c7c7;
+    border: 2px solid #ff9900;
+    width: 150px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000;
+    text-decoration: none;
+    flex-direction: column;
+}
+
+.hamburger-menu li {
+    padding: 10px;
+    list-style-type: none;
+}
+
+.hamburger-menu li a {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: rgb(72, 72, 72);
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-menu li a:hover {
+    background-color: #ff7700;
+}
+
 /* Small laptops (1024px and below) */
 @media (max-width: 1024px) {
     .navbar {
         display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+    
+    /* Show the hamburger menu on hover */
+    .hamburger:hover + .hamburger-menu,
+    .hamburger-menu:hover {
+        display: flex;
     }
 }
 
@@ -208,11 +277,31 @@
     .navbar {
         display: none;
     }
+
+    .hamburger {
+        display: flex;
+    }
+    
+    /* Show the hamburger menu on hover */
+    .hamburger:hover + .hamburger-menu,
+    .hamburger-menu:hover {
+        display: flex;
+    }
 }
 
 /* Phones (480px and below) */
 @media (max-width: 480px) {
     .navbar {
         display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+    
+    /* Show the hamburger menu on hover */
+    .hamburger:hover + .hamburger-menu,
+    .hamburger-menu:hover {
+        display: flex;
     }
 }

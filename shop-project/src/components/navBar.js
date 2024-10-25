@@ -12,6 +12,7 @@ const NavBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null); // Track scroll direction
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -63,51 +64,77 @@ const NavBar = () => {
     navigate(`/products?category=${category}`);
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <nav className="navbar">
-      <ul className="nav-left">
-        {/* Only the image is wrapped in the link */}
-        <li>
-          <Link to="/">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/shop-project-4b475.appspot.com/o/Runova-logo.jpg?alt=media&token=f4e29a69-d879-45fc-9c3a-21fc47c42b07" // Replace with your image path
-              alt="Home"
-               className={`home-icon ${
-                scrollDirection === 'down' ? 'spin-forward' : scrollDirection === 'up' ? 'spin-backward' : ''
-              }`}
-            />
-          </Link>
-        </li>
-      </ul>
-      <ul className="nav-right">
-        {user && username && <li className='welcome'>Welcome, {username}</li>}
-        {isAdmin && <li><Link to="/admin">Admin Panel</Link></li>}
-        <li
-          className="dropdown"
-          onMouseEnter={() => setShowDropdown(true)}
-          onMouseLeave={() => setShowDropdown(false)}
-        >
-          <span className='dropdown-shop'>Shop</span>
-          {showDropdown && (
-            <ul className="dropdown-menu">
-              <li onClick={() => handleCategoryClick('mens')}>Mens</li>
-              <li onClick={() => handleCategoryClick('womens')}>Womens</li>
-              <li onClick={() => handleCategoryClick('all')}>All</li>
-            </ul>
-          )}
-        </li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/cart">Cart</Link></li>
-        {user ? (
-          <li>
-            <button onClick={handleLogout} className="auth-button">Logout</button>
-          </li>
-        ) : (
-          <li><Link to="/login" className="auth-button">Login</Link></li>
+    <>
+      {/* Hamburger icon and menu, outside of the <nav> */}
+      <div className="hamburger-container">
+        <div className="hamburger" onClick={toggleMenu}>
+          <div className='hamburger-icon'>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </div>
+        </div>
+
+        {menuOpen && (
+          <ul className="hamburger-menu">
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/products">Shop</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/cart">Cart</Link></li>
+          </ul>
         )}
-      </ul>
-    </nav>
+      </div>
+      <nav className="navbar">
+        <ul className="nav-left">
+          {/* Only the image is wrapped in the link */}
+          <li>
+            <Link to="/">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/shop-project-4b475.appspot.com/o/Runova-logo.jpg?alt=media&token=f4e29a69-d879-45fc-9c3a-21fc47c42b07" // Replace with your image path
+                alt="Home"
+                className={`home-icon ${
+                  scrollDirection === 'down' ? 'spin-forward' : scrollDirection === 'up' ? 'spin-backward' : ''
+                }`}
+              />
+            </Link>
+          </li>
+        </ul>
+        <ul className="nav-right">
+          {user && username && <li className='welcome'>Welcome, {username}</li>}
+          {isAdmin && <li><Link to="/admin">Admin Panel</Link></li>}
+          <li
+            className="dropdown"
+            onMouseEnter={() => setShowDropdown(true)}
+            onMouseLeave={() => setShowDropdown(false)}
+          >
+            <span className='dropdown-shop'>Shop</span>
+            {showDropdown && (
+              <ul className="dropdown-menu">
+                <li onClick={() => handleCategoryClick('mens')}>Mens</li>
+                <li onClick={() => handleCategoryClick('womens')}>Womens</li>
+                <li onClick={() => handleCategoryClick('all')}>All</li>
+              </ul>
+            )}
+          </li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/cart">Cart</Link></li>
+          {user ? (
+            <li>
+              <button onClick={handleLogout} className="auth-button">Logout</button>
+            </li>
+          ) : (
+            <li><Link to="/login" className="auth-button">Login</Link></li>
+          )}
+        </ul>
+      </nav>
+    </>
   );
 };
 
