@@ -19,8 +19,24 @@
   }
   
   .cart-item {
-    border-bottom: 1px solid #ccc; /* Divider between items */
-    padding: 10px 0; /* Padding for each item */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .cart-item-details {
+    flex: 1;
+    padding-right: 15px;
+  }
+  
+  .cart-item-image {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
   .cart-item h2 {
