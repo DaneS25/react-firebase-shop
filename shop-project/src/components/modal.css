@@ -15,6 +15,8 @@
     background-color: white;
     padding: 20px;
     max-width: 500px;
+    max-height: 90vh; /* Adjust to fit within the viewport */
+    overflow-y: auto; /* Enable scrolling if content exceeds viewport */
     width: 100%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -256,7 +258,7 @@
   flex-direction: column;
   gap: 15px;
   padding: 15px;
-  background-color: #f9f9f9; /* Light background for distinction */
+  background-color: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 8px;
   margin-top: 20px;
@@ -281,12 +283,12 @@
 .admin-edit-form input[type="number"],
 .admin-edit-form textarea {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 4px;
   margin-top: 5px;
-  resize: vertical; /* Allow textarea to be resized vertically */
+  resize: vertical;
   box-sizing: border-box;
   transition: border-color 0.3s;
 }
@@ -294,50 +296,17 @@
 .admin-edit-form input[type="text"]:focus,
 .admin-edit-form input[type="number"]:focus,
 .admin-edit-form textarea:focus {
-  border-color: #ff9900; /* Highlight on focus */
+  border-color: #ff9900;
   outline: none;
 }
 
-.admin-edit-form button {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #007bff; /* Blue button for Save */
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.admin-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.admin-edit-form button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-}
-
-/* Responsive Styles for Admin Edit Form */
-@media (max-width: 768px) {
-  .admin-edit-form {
-      gap: 10px;
-      padding: 10px;
-  }
-
-  .admin-edit-form h3 {
-      font-size: 16px;
-  }
-
-  .admin-edit-form input[type="text"],
-  .admin-edit-form input[type="number"],
-  .admin-edit-form textarea {
-      padding: 6px;
-      font-size: 14px;
-  }
-
-  .admin-edit-form button {
-      padding: 8px 16px;
-      font-size: 14px;
-  }
-}
-
-/* Admin Modal Save Button Styles */
 .admin-save-button {
   padding: 10px 20px;
   font-size: 16px;
@@ -347,10 +316,77 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-  display: inline-block;
-  margin-top: 15px;
 }
 
 .admin-save-button:hover {
   background-color: #218838;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  font-size: 16px;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Small laptops (1024px and below) */
+@media (max-width: 1024px) {
+  .modal-content {
+    max-width: 400px;
+    padding: 15px;
+  }
+
+  .modal-product-image {
+    max-height: 200px;
+  }
+
+  .admin-edit-form {
+    padding: 10px;
+  }
+}
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 90%;
+    padding: 10px;
+  }
+
+  .modal-product-image {
+    max-height: 180px;
+  }
+
+  .admin-edit-form {
+    gap: 10px;
+    padding: 10px;
+  }
+}
+
+/* Phones (480px and below) */
+@media (max-width: 480px) {
+  .modal-content {
+    max-width: 100%;
+    padding: 8px;
+  }
+
+  .modal-product-image {
+    max-height: 150px;
+  }
+
+  .admin-edit-form {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .admin-buttons {
+    flex-direction: column; /* Stack buttons vertically */
+  }
 }

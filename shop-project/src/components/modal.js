@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { collection, addDoc, doc, updateDoc, getDocs, query, where } from 'firebase/firestore';
+import { collection, addDoc, doc, updateDoc, deleteDoc, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import './modal.css';
 
@@ -43,6 +43,20 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
       onClose();
     } catch (error) {
       console.error('Error updating product:', error);
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm(`Are you sure you want to delete ${editableProduct.name}?`);
+    if (confirmed) {
+      try {
+        const productDoc = doc(db, 'products', product.id);
+        await deleteDoc(productDoc);
+        alert('Product deleted successfully!');
+        onClose();
+      } catch (error) {
+        console.error('Error deleting product:', error);
+      }
     }
   };
 
@@ -158,7 +172,10 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
                 onChange={handleInputChange}
               />
             </label>
-            <button onClick={handleSave}>Save Changes</button>
+            <div className="admin-buttons">
+              <button onClick={handleSave} className="admin-save-button">Save Changes</button>
+              <button onClick={handleDelete} className="delete-button">Delete Product</button>
+            </div>
           </div>
         ) : (
           <>
