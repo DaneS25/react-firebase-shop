@@ -1,13 +1,17 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { collection, getDocs, query, where, orderBy } from 'firebase/firestore'; // Import necessary Firestore functions
+import React, { useEffect, useState, useCallback, useContext } from 'react';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 import { db } from '../firebase';
-import { useLocation } from 'react-router-dom'; // Import useLocation for accessing router state
+import { useLocation } from 'react-router-dom';
 import ProductModal from './modal';
-import FilterMenu from './filterMenu'; // Import the filter component
+import FilterMenu from './filterMenu';
 import './productList.css';
-import shoeGif from '../Assets/shoegif.gif'; // Import the GIF
+import shoeGif from '../Assets/shoegif.gif';
+import { AuthContext } from './authContext';
 
 const ProductList = () => {
+  const { isAdmin } = useContext(AuthContext); // Ensure isAdmin is accessed from AuthContext
+  console.log("isAdmin in ProductList:", isAdmin); // Debug line for checking isAdmin
+
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,19 +24,16 @@ const ProductList = () => {
     waterproof: false,
   });
 
-  const location = useLocation(); // Access location to check for passed state
+  const location = useLocation();
 
-  // Set selected product if passed via location state
   useEffect(() => {
     if (location.state && location.state.selectedProduct) {
       setSelectedProduct(location.state.selectedProduct);
     }
   }, [location.state]);
 
-  // Function to fetch products based on filters
   const fetchProducts = useCallback(async () => {
     const productCollection = collection(db, 'products');
-    
     const conditions = [];
     if (filters.mens) conditions.push(where('gender', '==', 'mens'));
     if (filters.womens) conditions.push(where('gender', '==', 'womens'));
@@ -60,7 +61,7 @@ const ProductList = () => {
   }, [filters]);
 
   useEffect(() => {
-    fetchProducts(); // Fetch products when the component mounts
+    fetchProducts();
   }, [fetchProducts]);
 
   const openModal = (product) => {
@@ -100,8 +101,7 @@ const ProductList = () => {
             </div>
           ))}
         </div>
-        {/* Display the modal if a product is selected */}
-        {selectedProduct && <ProductModal product={selectedProduct} onClose={closeModal} />}
+        {selectedProduct && <ProductModal product={selectedProduct} onClose={closeModal} isAdmin={isAdmin} />}
       </div>
     </div>
   );

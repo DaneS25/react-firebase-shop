@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { auth, db } from '../firebase'; // Firebase setup
-import { onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, collection, addDoc } from 'firebase/firestore'; // Firestore functions
+import React, { useState, useContext } from 'react';
+import { db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { collection, addDoc } from 'firebase/firestore';
+import { AuthContext } from './authContext'; // Import AuthContext
 import './adminPanel.css'; // Import styles
 
 const AdminPanel = () => {
-  const [user, setUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(null); // To check if the user is admin
+  const { isAdmin, user } = useContext(AuthContext); // Access isAdmin and user from AuthContext
   const [productData, setProductData] = useState({
     name: '',
     type: '',
@@ -19,35 +18,14 @@ const AdminPanel = () => {
     sizes: [],
     featured: false,
     imageUrl: '',
-  }); // State to handle product form data
+  });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
-        if (userDoc.exists()) {
-          setIsAdmin(userDoc.data().isAdmin);
-        } else {
-          setIsAdmin(false);
-        }
-      } else {
-        setUser(null);
-        setIsAdmin(false); // Explicitly set to false if user is not logged in
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      if (isAdmin === false) {
-        navigate('/'); // Redirect to home if not an admin
-      }
-    }
-  }, [user, isAdmin, navigate]);
+  // Redirect if user is not admin
+  if (user && isAdmin === false) {
+    navigate('/');
+    return null; // Prevent rendering if navigating
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -67,16 +45,14 @@ const AdminPanel = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const productCollection = collection(db, 'products');
       await addDoc(productCollection, {
         ...productData,
-        price: Number(productData.price), // Ensure price is saved as a number
-        stock: Number(productData.stock), // Ensure stock is saved as a number
-        featured: Boolean(productData.featured), // Ensure featured is boolean
+        price: Number(productData.price),
+        stock: Number(productData.stock),
+        featured: Boolean(productData.featured),
       });
-
       alert('Product added successfully!');
       setProductData({
         name: '',
@@ -89,14 +65,14 @@ const AdminPanel = () => {
         sizes: [],
         featured: false,
         imageUrl: '',
-      }); // Clear the form
+      });
     } catch (error) {
       console.error('Error adding product: ', error);
     }
   };
 
   if (isAdmin === null) {
-    return <div>Loading...</div>; // Loading state
+    return <div>Loading...</div>;
   }
 
   if (!user) {
@@ -119,8 +95,6 @@ const AdminPanel = () => {
             required
           />
         </div>
-
-        {/* Change from text input to dropdown for Type */}
         <div className="form-group">
           <label htmlFor="type">Type:</label>
           <select
@@ -135,7 +109,6 @@ const AdminPanel = () => {
             <option value="trail">Trail</option>
           </select>
         </div>
-
         <div className="form-group">
           <label htmlFor="gender">Gender:</label>
           <select
@@ -150,7 +123,6 @@ const AdminPanel = () => {
             <option value="womens">Womens</option>
           </select>
         </div>
-
         <div className="form-group">
           <label htmlFor="description">Description:</label>
           <textarea
@@ -161,7 +133,6 @@ const AdminPanel = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="featured">Waterproof:</label>
           <input
@@ -174,7 +145,6 @@ const AdminPanel = () => {
             }
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="price">Price:</label>
           <input
@@ -186,7 +156,6 @@ const AdminPanel = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="stock">Stock:</label>
           <input
@@ -198,7 +167,6 @@ const AdminPanel = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="sizes">Sizes (comma-separated):</label>
           <input
@@ -211,7 +179,6 @@ const AdminPanel = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="featured">Featured:</label>
           <input
@@ -224,7 +191,6 @@ const AdminPanel = () => {
             }
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="imageUrl">Image URL:</label>
           <input
@@ -236,7 +202,6 @@ const AdminPanel = () => {
             required
           />
         </div>
-
         <button className="submit-button" type="submit">
           Add Product
         </button>
