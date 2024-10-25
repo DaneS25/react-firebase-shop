@@ -10,8 +10,10 @@ const AdminPanel = () => {
   const [isAdmin, setIsAdmin] = useState(null); // To check if the user is admin
   const [productData, setProductData] = useState({
     name: '',
-    type: '', // Type of the product (mens, womens)
+    type: '',
     description: '',
+    gender: '',
+    waterproof: false,
     price: '',
     stock: '',
     sizes: [],
@@ -80,6 +82,8 @@ const AdminPanel = () => {
         name: '',
         type: '',
         description: '',
+        gender: '',
+        waterproof: false,
         price: '',
         stock: '',
         sizes: [],
@@ -127,8 +131,8 @@ const AdminPanel = () => {
             required
           >
             <option value="">Select Type</option>
-            <option value="mens">Mens</option>
-            <option value="womens">Womens</option>
+            <option value="road">Road</option>
+            <option value="trail">Trail</option>
           </select>
         </div>
 

@@ -1,65 +1,96 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import React, { useEffect, useState, useCallback } from 'react';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore'; // Import necessary Firestore functions
 import { db } from '../firebase';
 import ProductModal from './modal';
+import FilterMenu from './filterMenu'; // Import the filter component
 import './productList.css';
 import shoeGif from '../Assets/shoegif.gif'; // Import the GIF
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [loading, setLoading] = useState(true); // Add loading state
-  const location = useLocation();
+  const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({
+    price: '',
+    mens: false,
+    womens: false,
+    roadRunning: false,
+    trailRunning: false,
+    waterproof: false,
+  });
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const productCollection = collection(db, 'products');
-
-      // Get query parameter from the URL (e.g., category=mens)
-      const searchParams = new URLSearchParams(location.search);
-      const category = searchParams.get('category');
-
-      let productQuery;
-      if (category && category !== 'all') {
-        productQuery = query(productCollection, where('type', '==', category));
-      } else {
-        productQuery = productCollection; // No filter or "All" category
-      }
-
+  // Function to fetch products based on filters
+  const fetchProducts = useCallback(async () => {
+    const productCollection = collection(db, 'products');
+    
+    // Create an array to hold query conditions
+    const conditions = [];
+  
+    // Add gender filters
+    if (filters.mens) {
+      conditions.push(where('gender', '==', 'mens'));
+    }
+    if (filters.womens) {
+      conditions.push(where('gender', '==', 'womens'));
+    }
+  
+    // Add type filters
+    if (filters.roadRunning) {
+      conditions.push(where('type', '==', 'road'));
+    }
+    if (filters.trailRunning) {
+      conditions.push(where('type', '==', 'trail'));
+    }
+  
+    // Add waterproof filter
+    if (filters.waterproof) {
+      conditions.push(where('waterproof', '==', true));
+    }
+  
+    // Start with the base query
+    let productQuery = productCollection;
+  
+    // Combine all conditions
+    if (conditions.length) {
+      productQuery = query(productQuery, ...conditions);
+    }
+  
+    // Apply orderBy for price after conditions
+    if (filters.price === 'lowToHigh') {
+      productQuery = query(productQuery, orderBy('price', 'asc'));
+    } else if (filters.price === 'highToLow') {
+      productQuery = query(productQuery, orderBy('price', 'desc'));
+    }
+  
+    console.log("Final Product Query:", productQuery);
+  
+    try {
       const productSnapshot = await getDocs(productQuery);
       const productList = productSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
+      
       setProducts(productList);
-
-      // Force the splash to stay for 1 second after fetching
-      const timeoutId = setTimeout(() => {
-        setLoading(false);
-      }, 2000); // Adjust time as needed (currently 1 second)
-
-      return () => clearTimeout(timeoutId); // Cleanup function to clear the timeout
-    };
-
-    fetchProducts();
-
-    // Check if a product is passed via location.state from Home page
-    if (location.state && location.state.selectedProduct) {
-      setSelectedProduct(location.state.selectedProduct); // Automatically open the modal
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching products:", error);
     }
-  }, [location.search, location.state]);
+  }, [filters]);
+
+  useEffect(() => {
+    fetchProducts(); // Fetch products when the component mounts
+  }, [fetchProducts]); // Include fetchProducts in dependencies
 
   const openModal = (product) => {
-    setSelectedProduct(product); // Open the modal when a product is clicked
+    setSelectedProduct(product);
   };
 
   const closeModal = () => {
-    setSelectedProduct(null); // Close the modal
+    setSelectedProduct(null);
   };
 
   if (loading) {
-    // Render loading splash with GIF
     return (
       <div className="loading-splash">
         <img src={shoeGif} alt="Loading..." className="loading-gif" />
@@ -69,24 +100,27 @@ const ProductList = () => {
 
   return (
     <div className="product-list-container">
-      <h1 className="product-list-header">Product List</h1>
-      {products.length === 0 && <p>No products available.</p>}
-      <div className="products-grid">
-        {products.map((product) => (
-          <div 
-            key={product.id} 
-            className="product-card"
-            onClick={() => openModal(product)}
-          >
-            <img src={product.imageUrl} alt={product.name} className="product-image" />
-            <h2>{product.name}</h2>
-            <p>${product.price}</p>
-          </div>
-        ))}
+      <div className="filter-area">
+        <FilterMenu filters={filters} setFilters={setFilters} />
       </div>
-
-      {/* Render the modal only if a product is selected */}
-      {selectedProduct && <ProductModal product={selectedProduct} onClose={closeModal} />}
+      <div className="products-area">
+        <h1 className="product-list-header">Product List</h1>
+        {products.length === 0 && <p>No products available.</p>}
+        <div className="products-grid">
+          {products.map((product) => (
+            <div 
+              key={product.id} 
+              className="product-card"
+              onClick={() => openModal(product)}
+            >
+              <img src={product.imageUrl} alt={product.name} className="product-image" />
+              <h2>{product.name}</h2>
+              <p>${product.price}</p>
+            </div>
+          ))}
+        </div>
+        {selectedProduct && <ProductModal product={selectedProduct} onClose={closeModal} />}
+      </div>
     </div>
   );
 };
