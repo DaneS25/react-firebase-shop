@@ -108,7 +108,7 @@ const ProductModal = ({ product, onClose }) => {
         </div>
 
         <div className="quantity-control">
-          <h3>Quantity</h3>
+          <h3 className='quantity-head'>Quantity</h3>
           <button className="quantity-button" onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity <= 1}>
             -
           </button>

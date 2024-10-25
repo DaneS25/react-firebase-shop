@@ -66,6 +66,10 @@
     justify-content: center;
     margin: 20px 0;
   }
+
+  .quantity-head {
+    padding: 10px;
+  }
   
   .quantity-button {
     background-color: #ff9900;

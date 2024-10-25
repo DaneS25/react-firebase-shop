@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { collection, getDocs, query, where, orderBy } from 'firebase/firestore'; // Import necessary Firestore functions
 import { db } from '../firebase';
+import { useLocation } from 'react-router-dom'; // Import useLocation for accessing router state
 import ProductModal from './modal';
 import FilterMenu from './filterMenu'; // Import the filter component
 import './productList.css';
@@ -19,50 +20,30 @@ const ProductList = () => {
     waterproof: false,
   });
 
+  const location = useLocation(); // Access location to check for passed state
+
+  // Set selected product if passed via location state
+  useEffect(() => {
+    if (location.state && location.state.selectedProduct) {
+      setSelectedProduct(location.state.selectedProduct);
+    }
+  }, [location.state]);
+
   // Function to fetch products based on filters
   const fetchProducts = useCallback(async () => {
     const productCollection = collection(db, 'products');
     
-    // Create an array to hold query conditions
     const conditions = [];
+    if (filters.mens) conditions.push(where('gender', '==', 'mens'));
+    if (filters.womens) conditions.push(where('gender', '==', 'womens'));
+    if (filters.roadRunning) conditions.push(where('type', '==', 'road'));
+    if (filters.trailRunning) conditions.push(where('type', '==', 'trail'));
+    if (filters.waterproof) conditions.push(where('waterproof', '==', true));
   
-    // Add gender filters
-    if (filters.mens) {
-      conditions.push(where('gender', '==', 'mens'));
-    }
-    if (filters.womens) {
-      conditions.push(where('gender', '==', 'womens'));
-    }
-  
-    // Add type filters
-    if (filters.roadRunning) {
-      conditions.push(where('type', '==', 'road'));
-    }
-    if (filters.trailRunning) {
-      conditions.push(where('type', '==', 'trail'));
-    }
-  
-    // Add waterproof filter
-    if (filters.waterproof) {
-      conditions.push(where('waterproof', '==', true));
-    }
-  
-    // Start with the base query
     let productQuery = productCollection;
-  
-    // Combine all conditions
-    if (conditions.length) {
-      productQuery = query(productQuery, ...conditions);
-    }
-  
-    // Apply orderBy for price after conditions
-    if (filters.price === 'lowToHigh') {
-      productQuery = query(productQuery, orderBy('price', 'asc'));
-    } else if (filters.price === 'highToLow') {
-      productQuery = query(productQuery, orderBy('price', 'desc'));
-    }
-  
-    console.log("Final Product Query:", productQuery);
+    if (conditions.length) productQuery = query(productQuery, ...conditions);
+    if (filters.price === 'lowToHigh') productQuery = query(productQuery, orderBy('price', 'asc'));
+    else if (filters.price === 'highToLow') productQuery = query(productQuery, orderBy('price', 'desc'));
   
     try {
       const productSnapshot = await getDocs(productQuery);
@@ -80,7 +61,7 @@ const ProductList = () => {
 
   useEffect(() => {
     fetchProducts(); // Fetch products when the component mounts
-  }, [fetchProducts]); // Include fetchProducts in dependencies
+  }, [fetchProducts]);
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -104,7 +85,7 @@ const ProductList = () => {
         <FilterMenu filters={filters} setFilters={setFilters} />
       </div>
       <div className="products-area">
-        <h1 className="product-list-header">Product List</h1>
+        <h1 className="product-list-header">Runova Shoes</h1>
         {products.length === 0 && <p>No products available.</p>}
         <div className="products-grid">
           {products.map((product) => (
@@ -119,6 +100,7 @@ const ProductList = () => {
             </div>
           ))}
         </div>
+        {/* Display the modal if a product is selected */}
         {selectedProduct && <ProductModal product={selectedProduct} onClose={closeModal} />}
       </div>
     </div>
