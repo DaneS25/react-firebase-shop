@@ -1,4 +1,5 @@
 import React from 'react';
+import './filterMenu.css';
 
 const FilterMenu = ({ filters, setFilters }) => {
   const handleChange = (e) => {
@@ -11,7 +12,7 @@ const FilterMenu = ({ filters, setFilters }) => {
 
   return (
     <div className="filter-menu">
-      <h2>Filters</h2>
+      <h2>Search</h2>
       <h3>Price</h3>
       <select name="price" onChange={handleChange} value={filters.price}>
         <option value="">Select</option>

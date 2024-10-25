@@ -137,6 +137,21 @@ const AdminPanel = () => {
         </div>
 
         <div className="form-group">
+          <label htmlFor="gender">Gender:</label>
+          <select
+            id="gender"
+            name="gender"
+            value={productData.gender}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="">Select Gender</option>
+            <option value="mens">Mens</option>
+            <option value="womens">Womens</option>
+          </select>
+        </div>
+
+        <div className="form-group">
           <label htmlFor="description">Description:</label>
           <textarea
             id="description"
@@ -144,6 +159,19 @@ const AdminPanel = () => {
             value={productData.description}
             onChange={handleInputChange}
             required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="featured">Waterproof:</label>
+          <input
+            type="checkbox"
+            id="waterproof"
+            name="waterproof"
+            checked={productData.waterproof}
+            onChange={(e) =>
+              setProductData({ ...productData, waterproof: e.target.checked })
+            }
           />
         </div>
 
