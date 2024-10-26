@@ -34,21 +34,28 @@
     margin-bottom: 20px;
   }
 
+  .size-container {
+    display: flex;
+    justify-content: center;
+  }
+
   .size-grid {
+    max-width: 200px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    margin: 20px 0;
   }
   
   .size-box {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #ff9900;
     cursor: pointer;
-    border-radius: 5px;
     text-align: center;
     font-weight: bold;
     transition: background 0.3s;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
   }
   
   .size-box.available {
@@ -60,6 +67,10 @@
     background-color: #eee;
     color: #aaa;
     pointer-events: none;
+  }
+
+  .size-box:hover {
+    background-color: #ff7700;
   }
   
   .size-box.selected {

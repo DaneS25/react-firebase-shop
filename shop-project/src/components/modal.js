@@ -185,16 +185,18 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
             <p><strong>Description:</strong> {editableProduct.description}</p>
 
             <h3>Select Size</h3>
-            <div className="size-grid">
-              {Array.from({ length: 9 }, (_, i) => i + 6).map((size) => (
-                <div
-                  key={size}
-                  className={`size-box ${product.sizes.includes(size) ? 'available' : 'unavailable'} ${selectedSize === size ? 'selected' : ''}`}
-                  onClick={() => handleSizeSelection(size)}
-                >
-                  {size}
-                </div>
-              ))}
+            <div className='size-container'>
+              <div className="size-grid">
+                {Array.from({ length: 12 }, (_, i) => i + 5).map((size) => (
+                  <div
+                    key={size}
+                    className={`size-box ${product.sizes.includes(size) ? 'available' : 'unavailable'} ${selectedSize === size ? 'selected' : ''}`}
+                    onClick={() => handleSizeSelection(size)}
+                  >
+                    {size}
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="quantity-control">
