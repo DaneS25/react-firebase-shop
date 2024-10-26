@@ -4,6 +4,10 @@ import { collection, getDocs, query, where } from 'firebase/firestore'; // Fireb
 import { db } from '../firebase'; // Import Firebase Firestore setup
 import './home.css'; // Import styles
 import shoeGif from '../Assets/shoegif.gif'; // Import the GIF
+import social1 from '../Assets/social-1.png';
+import social2 from '../Assets/social-2.png';
+import social3 from '../Assets/social-3.png';
+import social4 from '../Assets/social-4.png';
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -91,6 +95,21 @@ const Home = () => {
           ))
         )}
       </div>
+        <div className="running-shoes-section">
+          <h2>Why Choose Runova Running Shoes?</h2>
+          <p>At Runova, we understand that every runner has unique needs, whether it's pounding the pavement or hitting the trails. Our shoes are crafted with advanced materials and cutting-edge technology to provide unparalleled support, flexibility, and durability. Each model is rigorously tested by seasoned runners, ensuring you get the best performance in every stride.</p>
+          <p>Runova shoes stand out from the crowd because we focus on the details that matter: lightweight design, impact-absorbing soles, and breathable materials. No matter your skill level, our shoes are engineered to boost your performance while providing comfort that lasts. Experience the difference with Runova, where quality meets innovation in every step.</p>
+        </div>
+        {/* Socials Section */}
+        <div className="socials-section">
+          <h2>Follow us on all socials</h2>
+          <div className="socials-icons">
+            <img src={social1} alt="Facebook" className="social-icon" />
+            <img src={social2} alt="Twitter" className="social-icon" />
+            <img src={social3} alt="Instagram" className="social-icon" />
+            <img src={social4} alt="LinkedIn" className="social-icon" />
+          </div>
+        </div>
     </div>
   );
 };

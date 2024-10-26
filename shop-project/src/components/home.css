@@ -135,6 +135,10 @@
   text-align: center;
   font-size: 18px;
   color: #333;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 16px;
 }
 
 .featured-product-image {
@@ -143,6 +147,7 @@
   height: auto;
   margin-bottom: 10px;
   object-fit: cover;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .featured-product-image:hover {
@@ -159,6 +164,9 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .view-button:hover {
@@ -180,6 +188,66 @@
   border-radius: 50%; /* Make the image round */
   mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 60%);
   -webkit-mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 60%); /* For Safari */
+}
+
+.running-shoes-section {
+  padding: 40px 180px;
+  text-align: left;
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+}
+
+.running-shoes-section h2 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+.running-shoes-section p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.socials-section {
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+  width: 100%;
+}
+
+.socials-section h2 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+.socials-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s;
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
 }
 
 /* Small laptops (1024px and below) */
@@ -230,6 +298,15 @@
   .home-content-grid {
       grid-template-columns: repeat(2, 1fr); /* Change to 2 columns */
   }
+
+  .running-shoes-section {
+      display: none; /* Hide the section */
+  }
+
+  .social-icon {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 /* Tablets (768px and below) */
@@ -275,6 +352,14 @@
   .home-content-grid {
       grid-template-columns: 1fr; /* Stack in a single column */
   }
+
+  .running-shoes-section {
+    display: none; /* Hide the section */
+}
+.social-icon {
+  width: 30px;
+  height: 30px;
+}
 }
 
 /* Phones (480px and below) */
@@ -330,4 +415,12 @@
   .loading-gif {
       width: 300px;
   }
+
+  .running-shoes-section {
+    display: none; /* Hide the section */
+}
+.social-icon {
+  width: 30px;
+  height: 30px;
+}
 }
