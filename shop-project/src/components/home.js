@@ -29,7 +29,7 @@ const Home = () => {
 
       const timeoutId = setTimeout(() => {
         setLoading(false);
-      }, 2000); // Keep splash for 3 seconds
+      }, 3000); // Keep splash for 3 seconds
   
       return () => clearTimeout(timeoutId); // Cleanup function to clear the timeout
     };
