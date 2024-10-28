@@ -27,6 +27,21 @@ const ProductList = () => {
   const location = useLocation();
 
   useEffect(() => {
+    // Check if there's a category parameter in the URL
+    const searchParams = new URLSearchParams(location.search);
+    const category = searchParams.get('category');
+
+    // Update the filter state based on the category
+    if (category) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        mens: category === 'mens',
+        womens: category === 'womens',
+      }));
+    }
+  }, [location.search]);
+
+  useEffect(() => {
     if (location.state && location.state.selectedProduct) {
       setSelectedProduct(location.state.selectedProduct);
     }
@@ -96,8 +111,10 @@ const ProductList = () => {
               onClick={() => openModal(product)}
             >
               <img src={product.imageUrl} alt={product.name} className="product-image" />
-              <h2>{product.name}</h2>
-              <p>${product.price}</p>
+              <div className='product-info'>
+                <h2>{product.name}</h2>
+                <p>${product.price}</p>
+              </div>
             </div>
           ))}
         </div>

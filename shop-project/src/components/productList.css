@@ -49,15 +49,14 @@
   font-weight: 400;
   font-size: 18px;
   color: rgb(72, 72, 72);
-  border: 1px solid #ff9900;
-  padding: 15px;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 250px; /* Set a maximum width to control the card size */
   margin: 0 auto; /* Center each card within its grid space */
   box-sizing: border-box;
   cursor: pointer; /* Change cursor to pointer on hover */
+  overflow: hidden; /* Prevent overflow */
 }
 
 .product-card:hover {
@@ -67,9 +66,29 @@
 
 /* Responsive product images */
 .product-image {
-  max-width: 100%;
-  max-height: 150px;
-  height: auto;
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image fills the space while maintaining aspect ratio */
+}
+
+/* Container for product name and price */
+.product-info {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Add some space between the name and price */
+}
+
+.product-info h2 {
+  margin: 0;
+  font-size: 1.2em; /* Adjust font size for product name */
+  font-weight: bold;
+}
+
+.product-info p {
+  margin: 0;
+  font-size: 1em; /* Adjust font size for product price */
+  color: rgb(125, 124, 124); /* Use a distinct color for the price */
 }
 
 .loading-splash {
