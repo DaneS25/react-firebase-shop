@@ -106,6 +106,48 @@
   border-radius: 50%; /* Make the image round */
 }
 
+/* Pagination styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  padding-bottom: 50px;
+  gap: 10px;
+}
+
+.pagination button {
+  background-color: #ff9900; /* Same color as product card border */
+  color: rgb(72, 72, 72); /* Same color as text in product cards */
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.pagination button:hover {
+  background-color: #e68a00; /* Darker shade for hover effect */
+  transform: translateY(-3px); /* Lift button slightly on hover */
+}
+
+.pagination button:disabled {
+  background-color: #c9c7c7; /* Light grey for disabled state */
+  color: rgb(125, 124, 124); /* Muted text color for disabled button */
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.pagination span {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: rgb(72, 72, 72); /* Same color as product card text */
+}
+
 /* Prevent horizontal scrolling */
 body {
   overflow-x: hidden;

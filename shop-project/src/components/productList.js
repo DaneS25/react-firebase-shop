@@ -11,7 +11,6 @@ import { AuthContext } from './authContext';
 const ProductList = () => {
   const { isAdmin } = useContext(AuthContext); // Ensure isAdmin is accessed from AuthContext
   console.log("isAdmin in ProductList:", isAdmin); // Debug line for checking isAdmin
-
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,6 +22,8 @@ const ProductList = () => {
     trailRunning: false,
     waterproof: false,
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 15;
 
   const location = useLocation();
 
@@ -87,6 +88,18 @@ const ProductList = () => {
     setSelectedProduct(null);
   };
 
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const totalPages = Math.ceil(products.length / productsPerPage);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
   if (loading) {
     return (
       <div className="loading-splash">
@@ -104,7 +117,7 @@ const ProductList = () => {
         <h1 className="product-list-header">Runova Shoes</h1>
         {products.length === 0 && <p>No products available.</p>}
         <div className="products-grid">
-          {products.map((product) => (
+          {currentProducts.map((product) => (
             <div 
               key={product.id} 
               className="product-card"
@@ -117,7 +130,23 @@ const ProductList = () => {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+          {/* Pagination Controls */}
+          <div className="pagination">
+            <button 
+              onClick={() => handlePageChange(currentPage - 1)} 
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button 
+              onClick={() => handlePageChange(currentPage + 1)} 
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
         {selectedProduct && <ProductModal product={selectedProduct} onClose={closeModal} isAdmin={isAdmin} />}
       </div>
     </div>
