@@ -160,8 +160,7 @@ body {
   }
 
   .filter-area {
-      height: auto;
-      padding: 10px;
+    display: none;
   }
 
   .product-list-header {
@@ -170,6 +169,7 @@ body {
 
   .products-grid {
       gap: 30px;
+      grid-template-columns: repeat(2, 1fr); /* Two products side by side */
   }
 
   .product-card {
@@ -186,7 +186,6 @@ body {
 /* Tablets (768px and below) */
 @media (max-width: 768px) {
   .product-list-container {
-      grid-template-columns: 1fr;
       padding: 10px;
   }
 
@@ -200,7 +199,7 @@ body {
 
   .products-grid {
       gap: 20px;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Smaller columns */
+      grid-template-columns: repeat(2, 1fr); /* Two products side by side */
   }
 
   .product-card {
@@ -226,7 +225,7 @@ body {
 
   .products-grid {
       gap: 15px;
-      grid-template-columns: 1fr; /* Stack cards in a single column */
+      grid-template-columns: repeat(2, 1fr); /* Two products side by side */
   }
 
   .product-card {
