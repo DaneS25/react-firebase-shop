@@ -97,6 +97,7 @@ const ProductList = () => {
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
