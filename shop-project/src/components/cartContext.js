@@ -25,8 +25,8 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const removeFromCart = (itemId) => {
-    setCartItems(cartItems.filter((item) => item.id !== itemId));
+  const removeFromCart = (productId, size) => {
+    setCartItems(cartItems.filter((item) => !(item.productId === productId && item.size === size)));
   };
 
   const getTotalPrice = () => {

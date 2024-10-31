@@ -26,7 +26,10 @@ const Cart = () => {
                 <p>Quantity: {item.quantity}</p>
                 <p>Size: {item.size}</p>
                 <p>Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
-                <button className="remove-button" onClick={() => removeFromCart(item.id)}>
+                <button
+                  className="remove-button"
+                  onClick={() => removeFromCart(item.productId, item.size)}
+                >
                   Remove
                 </button>
               </div>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { doc, updateDoc, deleteDoc} from 'firebase/firestore';
 import { db } from '../firebase';
 import { useCart } from './cartContext'; // Import useCart to access cart context
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './modal.css';
 
 const ProductModal = ({ product, onClose, isAdmin }) => {
@@ -42,10 +44,11 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
         price: Number(editableProduct.price),
         stock: Number(editableProduct.stock),
       });
-      alert('Product updated successfully!');
+      toast.success('Product updated successfully!');
       onClose();
     } catch (error) {
       console.error('Error updating product:', error);
+      toast.error('Failed to update product.');
     }
   };
 
@@ -55,10 +58,11 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
       try {
         const productDoc = doc(db, 'products', product.id);
         await deleteDoc(productDoc);
-        alert('Product deleted successfully!');
+        toast.success('Product deleted successfully!');
         onClose();
       } catch (error) {
         console.error('Error deleting product:', error);
+        toast.error('Failed to delete product.');
       }
     }
   };
@@ -66,7 +70,7 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
   // Add to cart functionality
   const handleAddToCart = () => {
     if (!selectedSize) {
-      alert("Please select a shoe size before adding to the cart.");
+      toast.error("Please select a shoe size before adding to the cart.");
       return;
     }
 
@@ -80,8 +84,11 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
       quantity,
       imageUrl: product.imageUrl,
     });
-
-    alert(`${product.name} (Size ${selectedSize}) has been added to your cart!`);
+    toast.success(`${product.name} (Size ${selectedSize}) has been added to your cart!`);
+      // Delay closing the modal slightly to allow the toast to show
+    setTimeout(() => {
+      onClose();
+    }, 2500);
   };
 
   // Handle input change for admin editing
@@ -106,6 +113,7 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
   if (!product) return null;
 
   return (
+    <>
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>{editableProduct.name}</h2>
@@ -196,6 +204,8 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
         )}
       </div>
     </div>
+    <ToastContainer autoClose={2000} />
+    </>
   );
 };
 
