@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { collection, addDoc, doc, updateDoc, deleteDoc, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../firebase';
+import { useCart } from './cartContext'; // Import useCart to access cart context
 import './modal.css';
 
 const ProductModal = ({ product, onClose, isAdmin }) => {
@@ -8,6 +7,8 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
   const [sessionId, setSessionId] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
+
+  const { addToCart } = useCart(); // Destructure addToCart from context
 
   // Initialize session ID
   useEffect(() => {
@@ -21,91 +22,29 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
     }
   }, []);
 
-  // Update editableProduct state when product prop changes
   useEffect(() => {
     setEditableProduct(product);
   }, [product]);
 
-  useEffect(() => {
-    console.log("isAdmin in ProductModal:", isAdmin); // Debugging line
-  }, [isAdmin]);
-
-  // Update Firestore with edited product details
-  const handleSave = async () => {
-    try {
-      const productDoc = doc(db, 'products', product.id);
-      await updateDoc(productDoc, {
-        ...editableProduct,
-        price: Number(editableProduct.price),
-        stock: Number(editableProduct.stock),
-      });
-      alert('Product updated successfully!');
-      onClose();
-    } catch (error) {
-      console.error('Error updating product:', error);
-    }
-  };
-
-  const handleDelete = async () => {
-    const confirmed = window.confirm(`Are you sure you want to delete ${editableProduct.name}?`);
-    if (confirmed) {
-      try {
-        const productDoc = doc(db, 'products', product.id);
-        await deleteDoc(productDoc);
-        alert('Product deleted successfully!');
-        onClose();
-      } catch (error) {
-        console.error('Error deleting product:', error);
-      }
-    }
-  };
-
   // Add to cart functionality
-  const addToCart = async () => {
+  const handleAddToCart = () => {
     if (!selectedSize) {
       alert("Please select a shoe size before adding to the cart.");
       return;
     }
 
-    try {
-      const cartRef = collection(db, 'cart');
-      const q = query(cartRef, where('sessionId', '==', sessionId), where('productId', '==', product.id), where('size', '==', selectedSize));
-      const existingCartItemSnapshot = await getDocs(q);
+    // Add item to cart using the cart context
+    addToCart({
+      productId: product.id,
+      sessionId,
+      name: product.name,
+      price: product.price,
+      size: selectedSize,
+      quantity,
+      imageUrl: product.imageUrl,
+    });
 
-      if (!existingCartItemSnapshot.empty) {
-        const existingCartItem = existingCartItemSnapshot.docs[0];
-        const newQuantity = existingCartItem.data().quantity + quantity;
-        
-        if (newQuantity > product.stock) {
-          alert("You cannot add more items than are in stock.");
-          return;
-        }
-
-        await updateDoc(doc(db, 'cart', existingCartItem.id), {
-          quantity: newQuantity,
-        });
-      } else {
-        await addDoc(cartRef, {
-          sessionId,
-          productId: product.id,
-          name: product.name,
-          price: product.price,
-          size: selectedSize,
-          quantity,
-          imageUrl: product.imageUrl,
-        });
-      }
-
-      alert(`${product.name} (Size ${selectedSize}) has been added to your cart!`);
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-    }
-  };
-
-  // Handle input change for admin editing
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditableProduct({ ...editableProduct, [name]: value });
+    alert(`${product.name} (Size ${selectedSize}) has been added to your cart!`);
   };
 
   // Size and quantity selection
@@ -129,89 +68,37 @@ const ProductModal = ({ product, onClose, isAdmin }) => {
         <h2>{editableProduct.name}</h2>
         <img src={editableProduct.imageUrl} alt={editableProduct.name} className="modal-product-image" />
 
-        {/* Admin Edit View */}
-        {isAdmin ? (
-          <div className="admin-edit-form">
-            <h3>Edit Product</h3>
-            <label>Product Name:
-              <input
-                type="text"
-                name="name"
-                value={editableProduct.name}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>Price:
-              <input
-                type="number"
-                name="price"
-                value={editableProduct.price}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>Stock:
-              <input
-                type="number"
-                name="stock"
-                value={editableProduct.stock}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>Description:
-              <textarea
-                name="description"
-                value={editableProduct.description}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>Image URL:
-              <input
-                type="text"
-                name="imageUrl"
-                value={editableProduct.imageUrl}
-                onChange={handleInputChange}
-              />
-            </label>
-            <div className="admin-buttons">
-              <button onClick={handleSave} className="admin-save-button">Save Changes</button>
-              <button onClick={handleDelete} className="delete-button">Delete Product</button>
-            </div>
-          </div>
-        ) : (
-          <>
-            {/* Regular User View */}
-            <p><strong>Price:</strong> ${editableProduct.price}</p>
-            <p><strong>Stock:</strong> {editableProduct.stock}</p>
-            <p><strong>Description:</strong> {editableProduct.description}</p>
+        {/* Regular User View */}
+        <p><strong>Price:</strong> ${editableProduct.price}</p>
+        <p><strong>Stock:</strong> {editableProduct.stock}</p>
+        <p><strong>Description:</strong> {editableProduct.description}</p>
 
-            <h3>Select Size</h3>
-            <div className='size-container'>
-              <div className="size-grid">
-                {Array.from({ length: 12 }, (_, i) => i + 5).map((size) => (
-                  <div
-                    key={size}
-                    className={`size-box ${product.sizes.includes(size) ? 'available' : 'unavailable'} ${selectedSize === size ? 'selected' : ''}`}
-                    onClick={() => handleSizeSelection(size)}
-                  >
-                    {size}
-                  </div>
-                ))}
+        <h3>Select Size</h3>
+        <div className='size-container'>
+          <div className="size-grid">
+            {Array.from({ length: 12 }, (_, i) => i + 5).map((size) => (
+              <div
+                key={size}
+                className={`size-box ${product.sizes.includes(size) ? 'available' : 'unavailable'} ${selectedSize === size ? 'selected' : ''}`}
+                onClick={() => handleSizeSelection(size)}
+              >
+                {size}
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
 
-            <div className="quantity-control">
-              <h3 className="quantity-head">Quantity</h3>
-              <button className="quantity-button" onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity <= 1}>-</button>
-              <span className="quantity-display">{quantity}</span>
-              <button className="quantity-button" onClick={() => handleQuantityChange(quantity + 1)} disabled={quantity >= product.stock}>+</button>
-            </div>
+        <div className="quantity-control">
+          <h3 className="quantity-head">Quantity</h3>
+          <button className="quantity-button" onClick={() => handleQuantityChange(quantity - 1)} disabled={quantity <= 1}>-</button>
+          <span className="quantity-display">{quantity}</span>
+          <button className="quantity-button" onClick={() => handleQuantityChange(quantity + 1)} disabled={quantity >= product.stock}>+</button>
+        </div>
 
-            <div className="buttons">
-              <button className="close-button" onClick={onClose}>Close</button>
-              <button className="add-to-cart-button" onClick={addToCart}>Add to Cart</button>
-            </div>
-          </>
-        )}
+        <div className="buttons">
+          <button className="close-button" onClick={onClose}>Close</button>
+          <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
+        </div>
       </div>
     </div>
   );

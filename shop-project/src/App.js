@@ -8,24 +8,29 @@ import Cart from './components/cart';
 import Login from './login';
 import Register from './register';
 import AdminPanel from './components/adminPanel';
+import Checkout from './components/checkout';
+import { CartProvider } from './components/cartContext';
 import { AuthProvider } from './components/authContext'; // Import AuthProvider
 
 function App() {
   return (
     <AuthProvider> {/* Wrap Router with AuthProvider */}
-      <Router>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<ProductList />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/admin" element={<AdminPanel />} />
-        </Routes>
-      </Router>
+      <CartProvider>
+        <Router>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<ProductList />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+        </Router>
+      </CartProvider>
     </AuthProvider>
   );
 }
