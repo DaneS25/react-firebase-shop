@@ -9,6 +9,7 @@ import Login from './login';
 import Register from './register';
 import AdminPanel from './components/adminPanel';
 import Checkout from './components/checkout';
+import Success from "./components/success";
 import { CartProvider } from './components/cartContext';
 import { AuthProvider } from './components/authContext'; // Import AuthProvider
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/success" element={<Success />} />
           </Routes>
         </Router>
       </CartProvider>
